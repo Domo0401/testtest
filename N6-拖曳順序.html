@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>第五章</title>
 <style>
     body {
@@ -97,6 +96,8 @@
 }
 .draggable {
     touch-action: none; /* 防止觸摸滾動 */
+    cursor: grab;
+    user-drag: none;
 }
 </style>
 </head>
@@ -137,36 +138,7 @@
             }
         }
     }
-            // 添加觸摸事件處理
-        const draggableImages = document.querySelectorAll('.draggable');
-        let draggedItem = null;
 
-        draggableImages.forEach(img => {
-            img.addEventListener('touchstart', touchStart);
-            img.addEventListener('touchend', touchEnd);
-            img.addEventListener('touchmove', touchMove);
-        });
-
-        function touchStart(e) {
-            draggedItem = this;
-            // 儲存起始觸摸位置
-            draggedItem.startX = e.touches[0].clientX;
-            draggedItem.startY = e.touches[0].clientY;
-        }
-
-        function touchEnd() {
-            draggedItem = null;
-        }
-
-        function touchMove(e) {
-            if (!draggedItem) return;
-
-            const x = e.touches[0].clientX - draggedItem.startX;
-            const y = e.touches[0].clientY - draggedItem.startY;
-
-            draggedItem.style.transform = `translate(${x}px, ${y}px)`;
-        }
-    
     const confirmButton1 = document.getElementById('confirmButton1');
     confirmButton1.addEventListener('click', () => {
         const target1 = document.querySelector('.target[data-order="1"]');
