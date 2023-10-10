@@ -104,34 +104,43 @@
         <div class="target" data-order="2" style="top: 180px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         <div class="target" data-order="3" style="top: 310px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         <div class="target" data-order="4" style="top: 440px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <img src="./程式圖片/N6/Step 02.png" alt="圖片2" draggable="true" ondragstart="drag(event)" class="step02">
-        <img src="./程式圖片/N6/Step 04.png" alt="圖片4" draggable="true" ondragstart="drag(event)" class="step04">
-        <img src="./程式圖片/N6/Step 01.png" alt="圖片1" draggable="true" ondragstart="drag(event)" class="step01">
-        <img src="./程式圖片/N6/Step 03.png" alt="圖片3" draggable="true" ondragstart="drag(event)" class="step03">
-        <img src="./程式圖片/N6/Step 00.png" alt="圖片錯誤" draggable="true" ondragstart="drag(event)" class="step00">
+        <img src="./程式圖片/N6/Step 02.png" alt="圖片2" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" class="step02">
+        <img src="./程式圖片/N6/Step 04.png" alt="圖片4" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" class="step04">
+        <img src="./程式圖片/N6/Step 01.png" alt="圖片1" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" class="step01">
+        <img src="./程式圖片/N6/Step 03.png" alt="圖片3" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" class="step03">
+        <img src="./程式圖片/N6/Step 00.png" alt="圖片錯誤" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" class="step00">
         <button class="buttonconfirm" id="confirmButton1"></button>
     </div>
 <script>
+    let touchedElement = null;
+
     function allowDrop(event) {
         event.preventDefault();
     }
 
-    function drag(event) {
-        event.dataTransfer.setData("text", event.target.alt);
+    function touchStart(event) {
+        const touchedImg = event.target;
+        if (touchedImg.classList.contains("step01") || touchedImg.classList.contains("step02") || touchedImg.classList.contains("step03") || touchedImg.classList.contains("step04")) {
+            touchedElement = touchedImg;
+        }
     }
 
-    function drop(event) {
+    function touchMove(event) {
         event.preventDefault();
-        const data = event.dataTransfer.getData("text");
-        const target = event.target;
+        if (touchedElement) {
+            const touch = event.touches[0];
+            touchedElement.style.position = 'absolute';
+            touchedElement.style.left = touch.pageX - touchedElement.offsetWidth / 2 + 'px';
+            touchedElement.style.top = touch.pageY - touchedElement.offsetHeight / 2 + 'px';
+        }
+    }
 
-        if (target.classList.contains("target")) {
-            const order = target.getAttribute("data-order");
-            const img = document.querySelector(`[alt="${data}"]`);
-
-            if (order && img) {
-                target.appendChild(img);
-            }
+    function touchEnd(event) {
+        if (touchedElement) {
+            touchedElement.style.position = '';
+            touchedElement.style.left = '';
+            touchedElement.style.top = '';
+            touchedElement = null;
         }
     }
     const confirmButton1 = document.getElementById('confirmButton1');
