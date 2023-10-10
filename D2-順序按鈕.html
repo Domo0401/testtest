@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第四章</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-image: url('./背景圖/背景圖4.jpg');
+    background-size: 1600px 1100px;
+    background-position: center;
+    font-family: Arial, sans-serif;
+  }
+
+  .container {
+      text-align: center;
+      padding-top: 100px;
+  }
+  .button-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 50px);
+    grid-gap: 5px;
+    text-align: center;
+    padding-left: 100px;
+  }
+
+  .button {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(237, 179, 113);
+    border: none;
+    cursor: pointer;
+  }
+  .buttonclose {
+    padding: 25px 25px;
+    background-color: transparent; /* 設定背景為透明 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-image: url('./按鈕/叉.png'); /* 設定按鈕的背景圖片 */
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    position: absolute; /* 使用絕對定位 */
+    top: 0; /* 距離上方的距離 */
+    left: 0; /* 距離左方的距離 */
+  }
+  .buttonconfirm {
+    padding: 20px 40px;
+    background-color: transparent; /* 設定背景為透明 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-image: url('./按鈕/確認.png'); /* 設定按鈕的背景圖片 */
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+  }
+  #result{
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+<div class="container" id="container">
+  <a href="page04.html"><button class="buttonclose" id="closeModalButton1"></button></a>
+  <h2>依照順序點完全部按鈕</h2>
+  <div class="button-grid" id="buttonContainer">
+    <button class="button" onclick="buttonClicked(6, 0, 0)" id="button0"></button>
+    <button class="button" onclick="buttonClicked(5, 0, 1)" id="button1"></button>
+    <button class="button" onclick="buttonClicked(2, 0, 2)" id="button2"></button>
+    <button class="button" onclick="buttonClicked(1, 0, 3)" id="button3"></button>
+    <button class="button" onclick="buttonClicked(36, 0, 4)" id="button4"></button>
+    <button class="button" onclick="buttonClicked(35, 0, 5)" id="button5"></button>
+
+    <button class="button" onclick="buttonClicked(7, 1, 0)" id="button6"></button>
+    <button class="button" onclick="buttonClicked(4, 1, 1)" id="button7"></button>
+    <button class="button" onclick="buttonClicked(3, 1, 2)" id="button8"></button>
+    <button class="button" onclick="buttonClicked(30, 1, 3)" id="button9"></button>
+    <button class="button" onclick="buttonClicked(31, 1, 4)" id="button10"></button>
+    <button class="button" onclick="buttonClicked(34, 1, 5)" id="button11"></button>
+
+    <button class="button" onclick="buttonClicked(8, 2, 0)" id="button12"></button>
+    <button class="button" onclick="buttonClicked(9, 2, 1)" id="button13"></button>
+    <button class="button" onclick="buttonClicked(28, 2, 2)" id="button14"></button>
+    <button class="button" onclick="buttonClicked(29, 2, 3)" id="button15"></button>
+    <button class="button" onclick="buttonClicked(32, 2, 4)" id="button16"></button>
+    <button class="button" onclick="buttonClicked(33, 2, 5)" id="button17"></button>
+
+    <button class="button" onclick="buttonClicked(11, 3, 0)" id="button18"></button>
+    <button class="button" onclick="buttonClicked(10, 3, 1)" id="button19"></button>
+    <button class="button" onclick="buttonClicked(27, 3, 2)" id="button20"></button>
+    <button class="button" onclick="buttonClicked(26, 3, 3)" id="button21"></button>
+    <button class="button" onclick="buttonClicked(23, 3, 4)" id="button22"></button>
+    <button class="button" onclick="buttonClicked(22, 3, 5)" id="button23"></button>
+
+    <button class="button" onclick="buttonClicked(12, 4, 0)" id="button24"></button>
+    <button class="button" onclick="buttonClicked(15, 4, 1)" id="button25"></button>
+    <button class="button" onclick="buttonClicked(16, 4, 2)" id="button26"></button>
+    <button class="button" onclick="buttonClicked(25, 4, 3)" id="button27"></button>
+    <button class="button" onclick="buttonClicked(24, 4, 4)" id="button28"></button>
+    <button class="button" onclick="buttonClicked(21, 4, 5)" id="button29"></button>
+
+    <button class="button" onclick="buttonClicked(13, 5, 0)" id="button30"></button>
+    <button class="button" onclick="buttonClicked(14, 5, 1)" id="button31"></button>
+    <button class="button" onclick="buttonClicked(17, 5, 2)" id="button32"></button>
+    <button class="button" onclick="buttonClicked(18, 5, 3)" id="button33"></button>
+    <button class="button" onclick="buttonClicked(19, 5, 4)" id="button34"></button>
+    <button class="button" onclick="buttonClicked(20, 5, 5)" id="button35"></button>
+  </div>
+  <button class="buttonconfirm" id="checkButton"></button>
+  <div id="result"></div>
+</div>
+<script>
+const buttonOrder = [
+  [6, 5, 2, 1, 36, 35],
+  [7, 4, 3, 30, 31, 34],
+  [8, 9, 28, 29, 32, 33],
+  [11, 10, 27, 26, 23, 22],
+  [12, 15, 16, 25, 24, 21],
+  [13, 14, 17, 18, 19, 20]
+];
+
+let conut = 1;
+
+function buttonClicked(Number, row, col) {
+  if (buttonOrder[row][col] === Number && conut === Number) {
+    const button = document.querySelectorAll('.button')[row * 6 + col];
+    button.style.backgroundColor = 'rgb(27, 161, 152)';
+    conut++
+
+    const checkButton = document.getElementById("checkButton");
+    const resultDiv = document.getElementById("result");
+    checkButton.addEventListener("click", () => {
+      if (conut === 37) {
+        window.location.href = 'page04-D2.html';
+      }
+      else{
+        resultDiv.textContent = "好像不太正確耶...";
+      }
+    })
+    
+  } 
+  else {
+    resetButtons()
+    conut = 1
+  }
+}
+
+function resetButtons() {
+  for(let i = 0; i < 6; i++){
+    for(let j = 0; j < 6; j++){
+      const button = document.querySelectorAll('.button')[i * 6 + j];
+      button.style.backgroundColor = 'rgb(237, 179, 113)';
+    }
+  }
+}
+
+  </script>
+
+</body>
+</html>

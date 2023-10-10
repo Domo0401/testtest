@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第四章</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        background-image: url('./背景圖/背景圖4.jpg');
+        background-size: 1600px 1100px;
+        background-position: center;
+        font-family: Arial, sans-serif;
+    }
+    .sudoku-board {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 2px;
+        width: 300px;
+        margin: 0 auto;
+        padding-right: 73px;
+    }
+    .cell {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #000;
+        text-align: center;
+        line-height: 30px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    .initial-cell {
+        background-color: lightgray;
+    }
+    .container {
+        text-align: center;
+    }
+    .buttonclose {
+        padding: 25px 25px;
+        background-color: transparent; /* 設定背景為透明 */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-image: url('./按鈕/叉.png'); /* 設定按鈕的背景圖片 */
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+    }
+    .buttonconfirm {
+        padding: 20px 40px;
+        background-color: transparent; /* 設定背景為透明 */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-image: url('./按鈕/確認.png'); /* 設定按鈕的背景圖片 */
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+        left: 10;
+    }
+    .clicked-cell {
+        background-color: rgb(230, 199, 173); /* 设置点击后的背景颜色 */
+    }
+</style>
+</head>
+<body>
+    <a href="page04.html"><button class="buttonclose" id="closeModalButton1"></button></a>
+    <div class="container">
+        <h1>請完成填格</h1>
+    </div >
+    <div class="sudoku-board" id="sudoku-board">
+    </div>
+    <div class="container">
+        <button class="buttonconfirm" id="checkButton"></button>
+        <div id="result"></div>
+    </div>
+    <script>
+        const board = [
+            [0, 6, 2, 2, 2, 6, 3, 3, 3, 2],
+            [3, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [3, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [3, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [5, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [5, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [4, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [4, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        ];
+        const closeModalButton1 = document.getElementById('closeModalButton1');
+        closeModalButton1.addEventListener('click', () => {
+            window.location.href = "page03.html"
+        })
+        const boardElement = document.getElementById("sudoku-board");
+        const checkButton = document.getElementById("checkButton");
+        const resultDiv = document.getElementById("result");
+        const rowsColoredCount = new Array(10).fill(0); // Initialize an array to store colored cell counts for each row
+        const colsColoredCount = new Array(10).fill(0); // Initialize an array to store colored cell counts for each column
+        let count = 0;
+
+        function createBoard() {
+            for (let i = 0; i < 10; i++) {
+                for (let j = 0; j < 10; j++) {
+                    const cell = document.createElement("input");
+                    cell.type = "text";
+                    cell.classList.add("cell");
+                    cell.value = board[i][j] !== 0 ? board[i][j] : "";
+                    cell.readOnly = true; // Add this line to make the cell read-only
+                    
+                    if (board[i][j] !== 0) {
+                        cell.classList.add("initial-cell");
+                        cell.disabled = true;
+                    } 
+                    else {
+                        cell.addEventListener("click", () => {
+                            cell.classList.toggle("clicked-cell");
+                            const index = Array.from(cell.parentElement.children).indexOf(cell); // 添加這行以獲取索引
+                            const row = Math.floor(index / 10);
+                            const col = index % 10;
+                        
+                            if (cell.classList.contains("clicked-cell")) {
+                                rowsColoredCount[row]++;
+                                colsColoredCount[col]++;
+                            } else {
+                                rowsColoredCount[row]--;
+                                colsColoredCount[col]--;
+                            }
+                        
+                            console.log("Rows Colored Count:", rowsColoredCount);
+                            console.log("Cols Colored Count:", colsColoredCount);
+                        });
+                        
+                    }
+                    
+                    boardElement.appendChild(cell);
+                }
+            }
+        }
+
+        createBoard();
+        
+        checkButton.addEventListener("click", () => {
+            for(let row = 1; row<10 ;row++){
+                if(row === 1 && rowsColoredCount[row] === 3){
+                    count++
+                }
+                if(row === 2 && rowsColoredCount[row] === 3){
+                    count++
+                }
+                if(row === 3 && rowsColoredCount[row] === 3){
+                    count++
+                }
+                if(row === 4 && rowsColoredCount[row] === 5){
+                    count++
+                }
+                if(row === 5 && rowsColoredCount[row] === 5){
+                    count++
+                }
+                if(row === 6 && rowsColoredCount[row] === 4){
+                    count++
+                }
+                if(row === 7 && rowsColoredCount[row] === 1){
+                    count++
+                }
+                if(row === 8 && rowsColoredCount[row] === 1){
+                    count++
+                }
+                if(row === 9 && rowsColoredCount[row] === 4){
+                    count++
+                }
+            }
+            for(let col = 1; col<10 ;col++){
+                if(col === 1 && colsColoredCount[col] === 6){
+                    count++
+                }
+                if(col === 2 && colsColoredCount[col] === 2){
+                    count++
+                }
+                if(col === 3 && colsColoredCount[col] === 2){
+                    count++
+                }
+                if(col === 4 && colsColoredCount[col] === 2){
+                    count++
+                }
+                if(col === 5 && colsColoredCount[col] === 6){
+                    count++
+                }
+                if(col === 6 && colsColoredCount[col] === 3){
+                    count++
+                }
+                if(col === 7 && colsColoredCount[col] === 3){
+                    count++
+                }
+                if(col === 8 && colsColoredCount[col] === 3){
+                    count++
+                }
+                if(col === 9 && colsColoredCount[col] === 2){
+                    count++
+                }
+            }
+            if(count === 18){
+                window.location.href = "page04-D1.html";
+            }
+            else {
+                resultDiv.textContent = "好像不太正確耶...";
+                count = 0;
+            }   
+        });
+        
+    </script>
+</body>
+</html>

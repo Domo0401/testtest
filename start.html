@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>尋馬偕</title>
+    <link rel="stylesheet" href="style.css">
+  
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('./背景圖/封面.png');
+            background-size: 1600px 1100px;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            text-align: center;
+            padding-top: 150px;
+        }                      
+        
+        .button {
+            padding: 25px 50px;
+            background-color: transparent;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url('./按鈕/開始.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .modal-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+        }
+
+        .buttoncswtich {
+            padding: 25px 50px;
+            background-color: transparent;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url('./按鈕/開始.png');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 id="welcomeMessage">尋馬偕</h1>
+    <button class="button" id="startButton"></button>
+  </div>
+
+  <script>
+    const startButton = document.getElementById('startButton');
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+    modalContent.innerHTML = `
+        <h2>歡迎進入馬偕的世界</h2>
+        <p>(這有影片)打開X1</p>
+        <a href="page01.html"><button class="buttoncswtich" id="Buttonswtich"></button></a>
+    `;
+
+    startButton.addEventListener('click', () => {
+        const modalBg = document.createElement('div');
+        modalBg.className = 'modal-bg';
+        modalBg.appendChild(modalContent);
+        document.body.appendChild(modalBg);
+        modalBg.style.display = 'flex'; // 显示弹出窗口
+    });
+  </script>
+</body>
+</html>

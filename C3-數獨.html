@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第三章</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        background-image: url('./背景圖/背景圖3.jpg');
+        background-size: 1600px 1100px;
+        background-position: center;
+        font-family: Arial, sans-serif;
+    }
+    .sudoku-board {
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        gap: 2px;
+        width: 300px;
+        margin: 0 auto;
+        padding-right: 37px;
+    }
+    .cell {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #000;
+        text-align: center;
+        line-height: 30px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    .initial-cell {
+        background-color: lightgray;
+    }
+    .container {
+        text-align: center;
+    }
+    .buttonclose {
+        padding: 25px 25px;
+        background-color: transparent; /* 設定背景為透明 */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-image: url('./按鈕/叉.png'); /* 設定按鈕的背景圖片 */
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+    }
+    .buttonconfirm {
+        padding: 20px 40px;
+        background-color: transparent; /* 設定背景為透明 */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-image: url('./按鈕/確認.png'); /* 設定按鈕的背景圖片 */
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+        left: 10;
+    }
+</style>
+</head>
+<body>
+    <a href="page03.html"><button class="buttonclose" id="closeModalButton1"></button></a>
+    <div class="container">
+        <h1>請完成數獨</h1>
+    </div >
+    <div class="sudoku-board" id="sudoku-board">
+    </div>
+    <div class="container">
+        <div id="result"></div>
+        <button class="buttonconfirm" id="checkButton"></button>
+    </div>
+    <script>
+        const board = [
+            [5, 3, 0, 0, 7, 0, 0, 0, 0],
+            [6, 0, 0, 1, 9, 5, 0, 0, 0],
+            [0, 9, 8, 0, 0, 0, 0, 6, 0],
+            [8, 0, 0, 0, 6, 0, 0, 0, 3],
+            [4, 0, 0, 8, 0, 3, 0, 0, 1],
+            [7, 0, 0, 0, 2, 0, 0, 0, 6],
+            [0, 6, 0, 0, 0, 0, 2, 8, 0],
+            [0, 0, 0, 4, 1, 9, 0, 0, 5],
+            [0, 0, 0, 0, 8, 0, 0, 7, 9]
+        ];
+            /*[5, 3, 4, 6, 7, 8, 9, 1, 2],
+            [6, 7, 2, 1, 9, 5, 3, 4, 8],
+            [1, 9, 8, 3, 4, 2, 5, 6, 7],
+            [8, 5, 9, 7, 6, 1, 4, 2, 3],
+            [4, 2, 6, 8, 5, 3, 7, 9, 1],
+            [7, 1, 3, 9, 2, 4, 8, 5, 6],
+            [9, 6, 1, 5, 3, 7, 2, 8, 4],
+            [2, 8, 7, 4, 1, 9, 6, 3, 5],
+            [3, 4, 5, 2, 8, 6, 1, 7, 9]*/
+        // 叉叉控制
+        const closeModalButton1 = document.getElementById('closeModalButton1');
+        closeModalButton1.addEventListener('click', () => {
+            window.location.href = "page03.html"
+        })
+        const boardElement = document.getElementById("sudoku-board");
+        const checkButton = document.getElementById("checkButton");
+        const resultDiv = document.getElementById("result");
+
+        function createBoard() {
+            for (let i = 0; i < 9; i++) {
+            for (let j = 0; j < 9; j++) {
+                const cell = document.createElement("input");
+                cell.type = "text";
+                cell.classList.add("cell");
+                cell.value = board[i][j] !== 0 ? board[i][j] : "";
+                if (board[i][j] !== 0) {
+                cell.classList.add("initial-cell");
+                cell.disabled = true;
+                }
+                boardElement.appendChild(cell);
+            }
+            }
+        }
+
+        createBoard();
+
+        checkButton.addEventListener("click", () => {
+            const userBoard = [];
+            let isValid = true;
+            let isFilled = true; // Flag to track whether all cells are filled
+        
+            document.querySelectorAll(".cell").forEach((cell, index) => {
+                const row = Math.floor(index / 9);
+                const col = index % 9;
+                const value = parseInt(cell.value) || 0;
+        
+                userBoard[row] = userBoard[row] || [];
+                userBoard[row][col] = value;
+                // Check if any cell is empty
+                if (value === 0) {
+                    isFilled = false;
+                }
+            });
+            if (!isFilled) {
+                isValid = false; // Set isValid to false if any cell is empty
+            } else {
+                // Check user input against the correct solution
+                for (let i = 0; i < 9; i++) {
+                    const rowSet = new Set();
+                    const colSet = new Set();
+                    const boxSet = new Set();
+            
+                    for (let j = 0; j < 9; j++) {
+                        const rowValue = userBoard[i][j];
+                        const colValue = userBoard[j][i];
+                        const boxValue = userBoard[Math.floor(i / 3) * 3 + Math.floor(j / 3)][(i % 3) * 3 + (j % 3)];
+            
+                        if (rowValue !== 0) {
+                            if (rowSet.has(rowValue)) {
+                                isValid = false;
+                            }
+                            rowSet.add(rowValue);
+                        }
+            
+                        if (colValue !== 0) {
+                            if (colSet.has(colValue)) {
+                                isValid = false;
+                            }
+                            colSet.add(colValue);
+                        }
+            
+                        if (boxValue !== 0) {
+                            if (boxSet.has(boxValue)) {
+                                isValid = false;
+                            }
+                            boxSet.add(boxValue);
+                        }
+                    }
+                }
+            }
+
+            if (isValid) {
+                window.location.href = "page03-C3.html";
+            } else {
+                resultDiv.textContent = "好像不太正確耶...";
+            }
+        });        
+        
+    </script>
+</body>
+</html>

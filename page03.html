@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>第三章</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('./背景圖/背景圖3.jpg');
+            background-size: 1600px 1100px;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            padding-top: 150px;
+        }
+
+        .button1-1{
+            padding: 50px 50px;
+            background-color: transparent; /* 設定背景為透明 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url('./按鈕/星.png'); /* 設定按鈕的背景圖片 */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .button1-2 {
+            padding: 50px 50px;
+            background-color: transparent; /* 設定背景為透明 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url('./按鈕/問.png'); /* 設定按鈕的背景圖片 */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .buttonclose {
+            padding: 25px 25px;
+            background-color: transparent; /* 設定背景為透明 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url('./按鈕/叉.png'); /* 設定按鈕的背景圖片 */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .buttonconfirm {
+            padding: 15px 30px;
+            background-color: transparent; /* 設定背景為透明 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url('./按鈕/確認.png'); /* 設定按鈕的背景圖片 */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .buttongo {
+            padding: 15px 30px;
+            background-color: transparent; /* 設定背景為透明 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url('./按鈕/繼續.png'); /* 設定按鈕的背景圖片 */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .buttonC41 {
+            padding: 100px 100px;
+            background-color: transparent; /* 設定背景為透明 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url('./程式圖片/C4/相關物1.PNG'); /* 設定按鈕的背景圖片 */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+        .buttonC42 {
+            padding: 100px 100px;
+            background-color: transparent; /* 設定背景為透明 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url('./程式圖片/C4/相關物2.PNG'); /* 設定按鈕的背景圖片 */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+        .buttonC43 {
+            padding: 100px 100px;
+            background-color: transparent; /* 設定背景為透明 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url('./程式圖片/C4/干擾1.PNG'); /* 設定按鈕的背景圖片 */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+        .buttonC44 {
+            padding: 100px 100px;
+            background-color: transparent; /* 設定背景為透明 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-image: url('./程式圖片/C4/干擾2.PNG'); /* 設定按鈕的背景圖片 */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        /* 添加彈跳視窗的樣式 */
+        .modal-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="welcomeMessage">第三章</h1>
+        <!-- 添加 ID 來選擇按鈕 -->
+        <button class="button1-1" id="button1-1"></button>
+        <button class="button1-2" id="button1-2"></button>
+    </div>
+
+    <!-- 彈跳視窗 -->
+    <div class="modal-bg" id="modal1">
+        <div class="modal-content">
+            <button class="buttonclose" id="closeModalButton1"></button>
+            <h2>請輸入機關的卡牌編號</h2>
+            <input type="text" id="input1" placeholder="例如 A1">
+            <button class="buttonconfirm" id="confirmButton1"></button>
+        </div>
+    </div>
+
+    <div class="modal-bg" id="modal2">
+        <div class="modal-content">
+            <button class="buttonclose" id="closeModalButton2"></button>
+            <h2>說明</h2>
+            <p>一些說明</p>
+        </div>
+    </div>
+
+    <script>
+        const button1 = document.getElementById('button1-1');
+        const button2 = document.getElementById('button1-2');
+        const modal1 = document.getElementById('modal1');
+        const modal2 = document.getElementById('modal2');
+        const closeModalButton1 = document.getElementById('closeModalButton1');
+        const closeModalButton2 = document.getElementById('closeModalButton2');
+        const confirmButton1 = document.getElementById('confirmButton1');
+        const input1 = document.getElementById('input1');
+
+        button1.addEventListener('click', () => {
+            modal1.style.display = 'flex';
+        });
+
+        button2.addEventListener('click', () => {
+            modal2.style.display = 'flex';
+        });
+
+        closeModalButton1.addEventListener('click', () => {
+            modal1.style.display = 'none';
+            // 在需要重置时(為了回到輸入卡牌的地方)
+            location.reload();
+        });
+
+        closeModalButton2.addEventListener('click', () => {
+            modal2.style.display = 'none';
+        });
+
+        confirmButton1.addEventListener('click', () => {
+            // M4
+            if (input1.value === "M4") {
+                // 清除現有內容
+                const modalContent = modal1.querySelector('.modal-content');
+                errorMessageAdded = false;
+                modalContent.innerHTML = `
+                    <button class="buttonclose" id="closeModalButton1"></button>
+                    <h2>請輸入共有幾個瘧疾病毒</h2>
+                    <p>(輸入數字即可 EX:1)</p>
+                    <input type="text" id="input2" placeholder="答">
+                    <button class="buttonconfirm" id="confirmButton1"></button>
+                `;
+                // 叉叉控制
+                const closeModalButton1 = document.getElementById('closeModalButton1');
+                closeModalButton1.addEventListener('click', () => {
+                     modal1.style.display = 'none';
+                     // 在需要重置时(為了回到輸入卡牌的地方)
+                    location.reload();
+                });
+                // 監聽新的確認按鈕
+                const confirmButton1 = document.getElementById('confirmButton1');
+                const input2 = document.getElementById('input2');
+                confirmButton1.addEventListener('click', () => {
+                  if (input2.value === "3") {
+                    const modalContent = modal1.querySelector('.modal-content');
+                    modalContent.innerHTML = `
+                    <h2>翻開卡片C4</h2>
+                    <button class="buttongo" id="goModalButton1"></button>
+                `;
+                    const goModalButton1 = document.getElementById('goModalButton1');
+                    goModalButton1.addEventListener('click', () => {
+                    modal1.style.display = 'none';
+                    // 在需要重置时(為了回到輸入卡牌的地方)
+                    location.reload();
+                    });
+                    errorMessageAdded = false;
+                  }
+                  else {
+                    // 清除用户输入的内容
+                    input2.value = '';
+                    // 答案错误时，显示提示
+                    if (!errorMessageAdded) {
+                        const modalContent = modal1.querySelector('.modal-content');
+                        const errorMessage = document.createElement('p');
+                        errorMessage.textContent = '這個答案不對喔~請再輸入一次';
+                        modalContent.appendChild(errorMessage);
+                        errorMessageAdded = true; // 标记错误提示已添加
+                    }
+                  }
+                });
+            }
+            //B8
+            else if(input1.value === "B8") {
+                window.location.href = "B8-望遠鏡.html";
+            }
+            // C3
+            else if(input1.value === "C3") {
+                window.location.href = "C3-數獨.html";
+            }
+            // C4
+            else if(input1.value === "C4") {
+                // 清除現有內容
+                const modalContent = modal1.querySelector('.modal-content');
+                errorMessageAdded = false;
+                modalContent.innerHTML = `
+                    <button class="buttonclose" id="closeModalButton1"></button>
+                    <h2>選出與敘述相關之物品</h2>
+                    <button class="buttonC41" id="buttonC41"></button>
+                    <button class="buttonC43" id="buttonC43"></button>
+                    <button class="buttonC42" id="buttonC42"></button>
+                    <button class="buttonC44" id="buttonC44"></button>
+                    <button class="buttonconfirm" id="confirmButton1"></button>
+                `;
+                // 叉叉控制
+                const closeModalButton1 = document.getElementById('closeModalButton1');
+                closeModalButton1.addEventListener('click', () => {
+                     modal1.style.display = 'none';
+                     // 在需要重置时(為了回到輸入卡牌的地方)
+                    location.reload();
+                });
+
+                let C4Count = 0;
+                let C41 = 0;
+                let C42 = 0;
+                let C43 = 0;
+                let C44 = 0;
+                const buttonC41 = document.getElementById('buttonC41');
+                buttonC41.addEventListener('click', () => {
+                    if (C41 === 0) {
+                        C4Count++;
+                        buttonC41.style.border = '2px solid red';
+                        C41++;
+                    }
+                    else{
+                        C4Count--;
+                        buttonC41.style.border = '0px solid red';
+                        C41 = 0;
+                    }
+                })
+                const buttonC42 = document.getElementById('buttonC42');
+                buttonC42.addEventListener('click', () => {
+                    if (C42 === 0) {
+                        C4Count++;
+                        buttonC42.style.border = '2px solid red';
+                        C42++;
+                    }
+                    else{
+                        C4Count--;
+                        buttonC42.style.border = '0px solid red';
+                        C42 = 0;
+                    }
+                })
+                const buttonC43 = document.getElementById('buttonC43');
+                buttonC43.addEventListener('click', () => {
+                    if (C43 === 0) {
+                        C4Count--;
+                        buttonC43.style.border = '2px solid red';
+                        C43++;
+                    }
+                    else{
+                        C4Count++;
+                        buttonC43.style.border = '0px solid red';
+                        C43 = 0;
+                    }
+                })
+                const buttonC44 = document.getElementById('buttonC44');
+                buttonC44.addEventListener('click', () => {
+                    if (C44 === 0) {
+                        C4Count--;
+                        buttonC44.style.border = '2px solid red';
+                        C44++;
+                    }
+                    else{
+                        C4Count++;
+                        buttonC44.style.border = '0px solid red';
+                        C44 = 0;
+                    }
+                })
+                // 監聽新的確認按鈕
+                const confirmButton1 = document.getElementById('confirmButton1');
+                confirmButton1.addEventListener('click', () => {
+                  if (C4Count === 2) {
+                    const modalContent = modal1.querySelector('.modal-content');
+                    modalContent.innerHTML = `
+                    <h2>翻開卡片M8、C2、C6</h2>
+                    <button class="buttongo" id="goModalButton1"></button>
+                `;
+                    const goModalButton1 = document.getElementById('goModalButton1');
+                    goModalButton1.addEventListener('click', () => {
+                    modal1.style.display = 'none';
+                    // 在需要重置时(為了回到輸入卡牌的地方)
+                    location.reload();
+                    });
+                    // 重置错误提示状态
+                    errorMessageAdded = false;
+                  }
+                  else {
+                    // 清除用户输入的内容
+                    C4Count = 0;
+                    buttonC41.style.border = '0px solid red';
+                    C41 = 0;
+                    buttonC42.style.border = '0px solid red';
+                    C42 = 0;
+                    buttonC43.style.border = '0px solid red';
+                    C43 = 0;
+                    buttonC44.style.border = '0px solid red';
+                    C44 = 0;
+                    // 答案错误时，显示提示
+                    if (!errorMessageAdded) {
+                        const modalContent = modal1.querySelector('.modal-content');
+                        const errorMessage = document.createElement('p');
+                        errorMessage.textContent = '這個答案不對喔~請再輸入一次';
+                        modalContent.appendChild(errorMessage);
+                        errorMessageAdded = true; // 标记错误提示已添加
+                    }
+                  }
+                });
+            }
+            //M9
+            else if(input1.value === "M9") {
+                window.location.href = "M9-小人接接接.html";
+            }
+            // 沒關
+            else {
+                const modalContent = modal1.querySelector('.modal-content');
+                modalContent.innerHTML = `
+                    <button class="buttonclose" id="closeModalButton1"></button>
+                    <h2>這裡沒有關卡喔~</h2>
+                    <p>可以放個圖片</p>
+                `;
+                // 叉叉控制
+                const closeModalButton1 = document.getElementById('closeModalButton1');
+                closeModalButton1.addEventListener('click', () => {
+                     modal1.style.display = 'none';
+                     // 在需要重置时(為了回到輸入卡牌的地方)
+                    location.reload();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
