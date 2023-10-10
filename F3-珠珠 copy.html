@@ -484,17 +484,16 @@
             
             let isCorrect = true;
             
-            for (let i = 0; i < buttons.length; i++) {
-                const buttonX = buttons[i].style.left;
-                const buttonY = buttons[i].style.top;
-                const correctX = correctPositions[i].left;
-                const correctY = correctPositions[i].top;
-                
-                if (buttonX !== correctX || buttonY !== correctY) {
-                    isCorrect = false;
-                    break;
-                }
+          for (let i = 0; i < buttons.length; i++) {
+            const buttonRect = buttons[i].getBoundingClientRect();
+            const correctX = parseFloat(correctPositions[i].left);
+            const correctY = parseFloat(correctPositions[i].top);
+            
+            if (Math.abs(buttonRect.left - correctX) > 1 || Math.abs(buttonRect.top - correctY) > 1) {
+                isCorrect = false;
+                break;
             }
+        }
             
             if (isCorrect) {
                 window.location.href = "page06-F3.html";
