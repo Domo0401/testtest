@@ -323,17 +323,48 @@
         const buttonXright12 = button.style.left;
         const buttonYright12 = button.style.top;
 
+        function change(button) {
+            let isDragging = false; // 用於標記是否正在拖動按鈕
+            let offsetX, offsetY; // 用於記錄按鈕的拖動偏移量
+            
+            // 監聽按鈕的觸控開始事件
+            button.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                const touch = e.touches[0];
+                offsetX = touch.clientX - button.getBoundingClientRect().left;
+                offsetY = touch.clientY - button.getBoundingClientRect().top;
+            });
+            
+            // 監聽按鈕的觸控移動事件
+            button.addEventListener('touchmove', (e) => {
+                if (isDragging) {
+                    const touch = e.touches[0];
+                    const newX = touch.clientX - offsetX;
+                    const newY = touch.clientY - offsetY;
+            
+                    // 更新按鈕位置
+                    button.style.left = newX + 'px';
+                    button.style.top = newY + 'px';
+                }
+            });
+            
+            // 監聽按鈕的觸控結束事件
+            button.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        }
+
+
+
+
+
+
+        
         button.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
             const buttonX = button.offsetLeft;
             const buttonY = button.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button.style.left = button3X + 'px';
-            button.style.top = button3Y + 'px';
-
+            change(button);
             button3.style.left = buttonX + 'px';
             button3.style.top = buttonY + 'px';
         });
