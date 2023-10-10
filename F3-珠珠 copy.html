@@ -329,10 +329,10 @@
             const button3Rect = button3.getBoundingClientRect();
         
             // 交換按鈕的位置
-            button.style.left = button3Rect.left - buttonRect.left + 'px';
-            button.style.top = button3Rect.top - buttonRect.top + 'px';
-            button3.style.left = buttonRect.left - button3Rect.left + 'px';
-            button3.style.top = buttonRect.top - button3Rect.top + 'px';
+            button.style.left = button3Rect.left + 'px';
+            button.style.top = button3Rect.top + 'px';
+            button3.style.left = buttonRect.left + 'px';
+            button3.style.top = buttonRect.top + 'px';
         });
         button1.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
