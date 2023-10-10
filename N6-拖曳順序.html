@@ -141,18 +141,7 @@
                 // 正確放置圖片，執行跳轉到另一個HTML
                 window.location.href = 'page05-N6.html';
             } else {
-                // 將圖片回歸原位
-                const images = document.querySelectorAll('img[draggable="true"]');
-                images.forEach(img => {
-                    img.style.transform = 'translate(0, 0)';
-                    document.body.appendChild(img);
-                });
-    
-                // 清空目標位置
-                target1.innerHTML = '';
-                target2.innerHTML = '';
-                target3.innerHTML = '';
-                target4.innerHTML = '';
+                location.reload();
             }
             dragItem = null; // 清除拖曳物品
         });
