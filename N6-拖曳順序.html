@@ -23,6 +23,10 @@
     align-items: center; /* 水平置中 */
     width: 300px;
   }
+    .text{
+        position: absolute; /* 固定位置 */
+        top: 10px;
+    }
   .target {
     width: 100px;
     height: 100px;
@@ -74,7 +78,7 @@
 <body>
     <a href="page05.html"><button class="buttonclose" id="closeModalButton1"></button></a>
     <div class="container">
-        <h1>請長按圖片拖移到正確位置(順序由上至下)</h1>
+        <h1 class="text">請長按圖片拖移到正確位置(順序由上至下)</h1>
         <div class="target" data-order="1" style="top: 50px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         <div class="target" data-order="2" style="top: 180px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         <div class="target" data-order="3" style="top: 310px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
