@@ -100,51 +100,40 @@
 <body>
     <a href="page05.html"><button class="buttonclose" id="closeModalButton1"></button></a>
     <div class="container">
-        <div class="target" data-order="1" style="top: 50px; left: 50px;" ontouchend="touchEnd(event)" ontouchmove="touchMove(event)" ontouchstart="touchStart(event)"></div>
-        <div class="target" data-order="2" style="top: 180px; left: 50px;" ontouchend="touchEnd(event)" ontouchmove="touchMove(event)" ontouchstart="touchStart(event)"></div>
-        <div class="target" data-order="3" style="top: 310px; left: 50px;" ontouchend="touchEnd(event)" ontouchmove="touchMove(event)" ontouchstart="touchStart(event)"></div>
-        <div class="target" data-order="4" style="top: 440px; left: 50px;" ontouchend="touchEnd(event)" ontouchmove="touchMove(event)" ontouchstart="touchStart(event)"></div>
-        <img src="./程式圖片/N6/Step 02.png" alt="圖片2" draggable="false" class="step02">
-        <img src="./程式圖片/N6/Step 04.png" alt="圖片4" draggable="false" class="step04">
-        <img src="./程式圖片/N6/Step 01.png" alt="圖片1" draggable="false" class="step01">
-        <img src="./程式圖片/N6/Step 03.png" alt="圖片3" draggable="false" class="step03">
-        <img src="./程式圖片/N6/Step 00.png" alt="圖片錯誤" draggable="false" class="step00">
+        <div class="target" data-order="1" style="top: 50px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="target" data-order="2" style="top: 180px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="target" data-order="3" style="top: 310px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="target" data-order="4" style="top: 440px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <img src="./程式圖片/N6/Step 02.png" alt="圖片2" draggable="true" ondragstart="drag(event)" class="step02">
+        <img src="./程式圖片/N6/Step 04.png" alt="圖片4" draggable="true" ondragstart="drag(event)" class="step04">
+        <img src="./程式圖片/N6/Step 01.png" alt="圖片1" draggable="true" ondragstart="drag(event)" class="step01">
+        <img src="./程式圖片/N6/Step 03.png" alt="圖片3" draggable="true" ondragstart="drag(event)" class="step03">
+        <img src="./程式圖片/N6/Step 00.png" alt="圖片錯誤" draggable="true" ondragstart="drag(event)" class="step00">
         <button class="buttonconfirm" id="confirmButton1"></button>
     </div>
 <script>
-    let selectedElement = null;
-
-    function touchStart(event) {
-        selectedElement = event.target;
+    function allowDrop(event) {
         event.preventDefault();
     }
 
-    function touchMove(event) {
-        if (selectedElement) {
-            const touch = event.touches[0];
-            selectedElement.style.left = touch.pageX - selectedElement.offsetWidth / 2 + 'px';
-            selectedElement.style.top = touch.pageY - selectedElement.offsetHeight / 2 + 'px';
-            event.preventDefault();
-        }
+    function drag(event) {
+        event.dataTransfer.setData("text", event.target.alt);
     }
 
-    function touchEnd(event) {
-        if (selectedElement) {
-            const data = selectedElement.alt;
-            const target = event.target;
+    function drop(event) {
+        event.preventDefault();
+        const data = event.dataTransfer.getData("text");
+        const target = event.target;
 
-            if (target.classList.contains("target")) {
-                const order = target.getAttribute("data-order");
-                if (order) {
-                    target.appendChild(selectedElement);
-                }
+        if (target.classList.contains("target")) {
+            const order = target.getAttribute("data-order");
+            const img = document.querySelector(`[alt="${data}"]`);
+
+            if (order && img) {
+                target.appendChild(img);
             }
-
-            selectedElement = null;
-            event.preventDefault();
         }
     }
-
     const confirmButton1 = document.getElementById('confirmButton1');
     confirmButton1.addEventListener('click', () => {
         const target1 = document.querySelector('.target[data-order="1"]');
