@@ -136,11 +136,17 @@
     }
 
     function touchEnd(event) {
-        if (touchedElement) {
-            touchedElement.style.position = '';
-            touchedElement.style.left = '';
-            touchedElement.style.top = '';
-            touchedElement = null;
+        event.preventDefault();
+        const data = event.dataTransfer.getData("text");
+        const target = event.target;
+
+        if (target.classList.contains("target")) {
+            const order = target.getAttribute("data-order");
+            const img = document.querySelector(`[alt="${data}"]`);
+
+            if (order && img) {
+                target.appendChild(img);
+            }
         }
     }
     const confirmButton1 = document.getElementById('confirmButton1');
