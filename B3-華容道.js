@@ -5,7 +5,7 @@ const resultDiv = document.getElementById("result");
 win = 0;
 
 // Set the seed for the random number generator
-const seed = "ttttt";
+const seed = "gogogogogogogogogo";
 const random = new Math.seedrandom(seed);
 
 // Shuffle the pieces using the seeded random number generator
