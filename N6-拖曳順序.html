@@ -95,6 +95,9 @@
     top: 475px;
     right: 50px;
 }
+.draggable {
+    touch-action: none; /* 防止觸摸滾動 */
+}
 </style>
 </head>
 <body>
@@ -104,54 +107,66 @@
         <div class="target" data-order="2" style="top: 180px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         <div class="target" data-order="3" style="top: 310px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         <div class="target" data-order="4" style="top: 440px; left: 50px;" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <img src="./程式圖片/N6/Step 02.png" alt="圖片2" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" class="step02">
-        <img src="./程式圖片/N6/Step 04.png" alt="圖片4" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" class="step04">
-        <img src="./程式圖片/N6/Step 01.png" alt="圖片1" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" class="step01">
-        <img src="./程式圖片/N6/Step 03.png" alt="圖片3" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" class="step03">
-        <img src="./程式圖片/N6/Step 00.png" alt="圖片錯誤" draggable="true" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" class="step00">
+        <img src="./程式圖片/N6/Step 02.png" alt="圖片2" draggable="true" ondragstart="drag(event)" class="step02">
+        <img src="./程式圖片/N6/Step 04.png" alt="圖片4" draggable="true" ondragstart="drag(event)" class="step04">
+        <img src="./程式圖片/N6/Step 01.png" alt="圖片1" draggable="true" ondragstart="drag(event)" class="step01">
+        <img src="./程式圖片/N6/Step 03.png" alt="圖片3" draggable="true" ondragstart="drag(event)" class="step03">
+        <img src="./程式圖片/N6/Step 00.png" alt="圖片錯誤" draggable="true" ondragstart="drag(event)" class="step00">
         <button class="buttonconfirm" id="confirmButton1"></button>
     </div>
 <script>
-    let touchedElement = null;
-
     function allowDrop(event) {
         event.preventDefault();
     }
 
-    function touchStart(event) {
-        const touchedImg = event.target;
-        if (touchedImg.classList.contains("step01") || touchedImg.classList.contains("step02") || touchedImg.classList.contains("step03") || touchedImg.classList.contains("step04")) {
-            touchedElement = touchedImg;
-        }
+    function drag(event) {
+        event.dataTransfer.setData("text", event.target.alt);
     }
 
-    function touchMove(event) {
+    function drop(event) {
         event.preventDefault();
-        if (touchedElement) {
-            const touch = event.touches[0];
-            touchedElement.style.position = 'absolute';
-            touchedElement.style.left = touch.pageX - touchedElement.offsetWidth / 2 + 'px';
-            touchedElement.style.top = touch.pageY - touchedElement.offsetHeight / 2 + 'px';
-        }
-    }
+        const data = event.dataTransfer.getData("text");
+        const target = event.target;
 
-    function touchEnd(event) {
-        if (touchedElement) {
-            touchedElement.style.position = '';
-            touchedElement.style.left = '';
-            touchedElement.style.top = '';
+        if (target.classList.contains("target")) {
+            const order = target.getAttribute("data-order");
+            const img = document.querySelector(`[alt="${data}"]`);
 
-            const target = event.target;
-            if (target.classList.contains("target")) {
-                const order = target.getAttribute("data-order");
-                if (order) {
-                    target.appendChild(touchedElement);
-                }
+            if (order && img) {
+                target.appendChild(img);
             }
-
-            touchedElement = null;
         }
     }
+            // 添加觸摸事件處理
+        const draggableImages = document.querySelectorAll('.draggable');
+        let draggedItem = null;
+
+        draggableImages.forEach(img => {
+            img.addEventListener('touchstart', touchStart);
+            img.addEventListener('touchend', touchEnd);
+            img.addEventListener('touchmove', touchMove);
+        });
+
+        function touchStart(e) {
+            draggedItem = this;
+            // 儲存起始觸摸位置
+            draggedItem.startX = e.touches[0].clientX;
+            draggedItem.startY = e.touches[0].clientY;
+        }
+
+        function touchEnd() {
+            draggedItem = null;
+        }
+
+        function touchMove(e) {
+            if (!draggedItem) return;
+
+            const x = e.touches[0].clientX - draggedItem.startX;
+            const y = e.touches[0].clientY - draggedItem.startY;
+
+            draggedItem.style.transform = `translate(${x}px, ${y}px)`;
+        }
+    
     const confirmButton1 = document.getElementById('confirmButton1');
     confirmButton1.addEventListener('click', () => {
         const target1 = document.querySelector('.target[data-order="1"]');
