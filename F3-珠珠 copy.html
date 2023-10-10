@@ -323,173 +323,142 @@
         const buttonXright12 = button.style.left;
         const buttonYright12 = button.style.top;
 
+        // 在 JavaScript 中更新按鈕位置，使用 translate3d
+        function updateButtonPosition(button, newX, newY) {
+            button.style.transform = `translate3d(${newX}px, ${newY}px, 0)`;
+        }
+        
         button.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button.offsetLeft;
-            const buttonY = button.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button.style.left = button3X + 'px';
-            button.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button.getBoundingClientRect().left;
+            const buttonY = button.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
         button1.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button1.offsetLeft;
-            const buttonY = button1.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button1.style.left = button3X + 'px';
-            button1.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button1.getBoundingClientRect().left;
+            const buttonY = button1.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button1, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
         button2.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button2.offsetLeft;
-            const buttonY = button2.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button2.style.left = button3X + 'px';
-            button2.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button2.getBoundingClientRect().left;
+            const buttonY = button2.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button2, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
         button4.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button4.offsetLeft;
-            const buttonY = button4.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button4.style.left = button3X + 'px';
-            button4.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button4.getBoundingClientRect().left;
+            const buttonY = button4.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button4, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
         button5.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button5.offsetLeft;
-            const buttonY = button5.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button5.style.left = button3X + 'px';
-            button5.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button5.getBoundingClientRect().left;
+            const buttonY = button5.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button5, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
         button6.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button6.offsetLeft;
-            const buttonY = button6.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button6.style.left = button3X + 'px';
-            button6.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button6.getBoundingClientRect().left;
+            const buttonY = button6.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button6, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
         button7.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button7.offsetLeft;
-            const buttonY = button7.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button7.style.left = button3X + 'px';
-            button7.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button7.getBoundingClientRect().left;
+            const buttonY = button7.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button7, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
         button8.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button8.offsetLeft;
-            const buttonY = button8.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button8.style.left = button3X + 'px';
-            button8.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button8.getBoundingClientRect().left;
+            const buttonY = button8.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button8, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
         button9.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button9.offsetLeft;
-            const buttonY = button9.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button9.style.left = button3X + 'px';
-            button9.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button9.getBoundingClientRect().left;
+            const buttonY = button9.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button9, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
         button10.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button10.offsetLeft;
-            const buttonY = button10.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button10.style.left = button3X + 'px';
-            button10.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button10.getBoundingClientRect().left;
+            const buttonY = button10.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button10, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
         button11.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button11.offsetLeft;
-            const buttonY = button11.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button11.style.left = button3X + 'px';
-            button11.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button11.getBoundingClientRect().left;
+            const buttonY = button11.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button11, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
         button12.addEventListener('click', () => {
             // 獲取按鈕的實際位置信息
-            const buttonX = button12.offsetLeft;
-            const buttonY = button12.offsetTop;
-            const button3X = button3.offsetLeft;
-            const button3Y = button3.offsetTop;
-
-            // 交換按鈕的位置
-            button12.style.left = button3X + 'px';
-            button12.style.top = button3Y + 'px';
-
-            button3.style.left = buttonX + 'px';
-            button3.style.top = buttonY + 'px';
+            const buttonX = button12.getBoundingClientRect().left;
+            const buttonY = button12.getBoundingClientRect().top;
+            const button3X = button3.getBoundingClientRect().left;
+            const button3Y = button3.getBoundingClientRect().top;
+        
+            // 交換按鈕的位置，使用 translate3d
+            updateButtonPosition(button12, button3X, button3Y);
+            updateButtonPosition(button3, buttonX, buttonY);
         });
 
         confirmButton1.addEventListener('click', () => {
